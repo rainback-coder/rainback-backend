@@ -1,0 +1,31 @@
+{
+  "version": 2,
+  "name": "rainback",
+  "builds": [
+    {
+      "src": "*.html",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    { "src": "/member",  "dest": "/rainback-app-shell.html" },
+    { "src": "/owner",   "dest": "/rainback-owner-shell.html" },
+    { "src": "/",        "dest": "/rainback-landing-v2.html" },
+    { "src": "/(.*)",    "dest": "/$1" }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options",    "value": "nosniff" },
+        { "key": "X-Frame-Options",           "value": "DENY" },
+        { "key": "X-XSS-Protection",          "value": "1; mode=block" },
+        { "key": "Referrer-Policy",           "value": "strict-origin-when-cross-origin" },
+        { "key": "Permissions-Policy",        "value": "camera=(), microphone=(), geolocation=(self)" }
+      ]
+    }
+  ],
+  "env": {
+    "API_URL": "@api_url"
+  }
+}
