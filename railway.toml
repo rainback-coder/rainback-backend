@@ -1,0 +1,15 @@
+[build]
+builder = "nixpacks"
+
+[deploy]
+startCommand = "npm start"
+healthcheckPath = "/health"
+healthcheckTimeout = 30
+restartPolicyType = "always"
+
+[[services]]
+name = "rainback-api"
+
+[services.variables]
+PORT = "3001"
+NODE_ENV = "production"
